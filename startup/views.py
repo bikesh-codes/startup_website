@@ -25,7 +25,8 @@ def about(request):
 
 def service(request):
   services = Service.objects.all()
-  context = { 'services': services}
+  testimonials = Testimonial.objects.all()
+  context = { 'services': services, 'testimonials': testimonials}
   return render(request, "service.html", context)
 
 

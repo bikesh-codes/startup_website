@@ -25,20 +25,8 @@ def blog_details(request, blog_id):
   blog = Blog.objects.get(pk=blog_id)
   paragraphs = blog.blog_desc.split('\n')
   blogs = Blog.objects.all().order_by('-created_on')
-
-  current_index = list(blogs).index(blog)
-  if current_index > 0:
-    previous_post = blogs[current_index - 1]
-  else:
-    previous_post = None
-
-  if current_index < len(blogs) - 1:
-    next_post = blogs[current_index + 1]
-  else:
-    next_post = None
-
   comments = Comment.objects.all().filter(blog_id=blog_id).order_by('-created_on')
-  context = {'blog': blog, 'comments': comments, 'blogs': blogs, 'previous_post': previous_post, 'next_post': next_post, 'paragraphs': paragraphs, 'current_blog': blog,}
+  context = {'blog': blog, 'comments': comments, 'blogs': blogs, 'paragraphs': paragraphs }
   return render(request, 'detail.html', context)
 
 
